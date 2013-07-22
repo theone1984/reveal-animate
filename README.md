@@ -1,8 +1,8 @@
-# Documentation
+## Documentation
 
 The plugin is documented using its slideshow as a documentation.
 
-# Start the slideshow
+## Start the slideshow
 
 The SVG component depends on XML HTTP requests, so you need to start a webserver. One simple solution might be to start a simple Python server.
 
