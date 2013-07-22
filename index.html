@@ -54,7 +54,7 @@
             <section>
                 <h2>Animating HTML</h2>
 
-                <div class="animated-html" style="overflow: hidden;">
+                <div class="animated-html" style="overflow: hidden; position: relative; width: 900px; height: 600px;">
                     <animation duration="500">
                         <animate data-id="slide1-1" data-property="left" data-value="150px"></animate>
                     </animation>
@@ -65,16 +65,16 @@
                         <animate data-id="slide1-1" data-property="opacity" data-value="0"></animate>
                         <animate data-id="slide1-2" data-property="opacity" data-value="0"></animate>
                         <animate data-id="slide1-3" data-property="left" data-value="180px"></animate>
-                        <animate data-id="slide1-3" data-property="top" data-value="350px"></animate>
+                        <animate data-id="slide1-3" data-property="top" data-value="150px"></animate>
                     </animation>
 
-                    <div id="slide1-1" class="tiny-font" style="position: absolute; left: 1500px; top: 250px; width: 700px;">
+                    <div id="slide1-1" class="tiny-font" style="position: absolute; left: 1500px; top: 150px; width: 700px;">
                         With reveal animate, you can animate arbitrary HTML content.
                     </div>
-                    <div id="slide1-2" class="tiny-font" style="position: absolute; left: 1500px; top: 450px; width: 700px;">
+                    <div id="slide1-2" class="tiny-font" style="position: absolute; left: 1500px; top: 350px; width: 700px;">
                         Switching to the next slide will animate the next element.
                     </div>
-                    <div id="slide1-3" style="position: absolute; -webkit-transform: rotate(15deg); -moz-transform: rotate(15deg); left: 1600px; top: 0; width: 800px;">
+                    <div id="slide1-3" style="position: absolute; left: 1600px; top: 0; width: 600px; -webkit-transform: rotate(15deg);">
                         You can also modify multiple elements in one step.
                     </div>
                 </div>
@@ -83,7 +83,7 @@
             <section>
                 <h2>Animating SVG</h2>
 
-                <div class="svg animated-svg" src="img/slide2.svg" style="width: 800px; height: 600px;">
+                <div class="svg animated-svg" src="img/slide2.svg" style="text-align: left; width: 800px; height: 600px;">
                     <animation duration="500">
                         <animate data-id="slide2-1" data-property="opacity" data-value="1"></animate>
                     </animation>
