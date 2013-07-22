@@ -1,3 +1,7 @@
+/* Written by Thomas Endres (Thomas-Endres@gmx.de) in 2013.
+ Dual licensed under the MIT license (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt).
+ Please attribute the author if you use it. */
+
 (function($) {
     Reveal.Animate = function() {
 
