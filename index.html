@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Datenbanken</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Thomas Endres">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <link rel="stylesheet" href="css/print/pdf.css" type="text/css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="background">
+</div>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+
+        <section>
+            <h1>Animate for reveal.js</h1>
+
+            <h3>A plugin for animating SVG graphics and HTML elements</h3>
+
+            <p style="margin-top: 45px;">
+                <i>
+                    <small>Created by Thomas Endres</small>
+                </i>
+            </p>
+        </section>
+        <section>
+
+            <section>
+                <h2>Animating HTML</h2>
+
+                <div class="animated-html" style="overflow: hidden;">
+                    <animation duration="500">
+                        <animate data-id="slide1-1" data-property="left" data-value="150px"></animate>
+                    </animation>
+                    <animation duration="500">
+                        <animate data-id="slide1-2" data-property="left" data-value="200px"></animate>
+                    </animation>
+                    <animation duration="500">
+                        <animate data-id="slide1-1" data-property="opacity" data-value="0"></animate>
+                        <animate data-id="slide1-2" data-property="opacity" data-value="0"></animate>
+                        <animate data-id="slide1-3" data-property="left" data-value="180px"></animate>
+                        <animate data-id="slide1-3" data-property="top" data-value="350px"></animate>
+                    </animation>
+
+                    <div id="slide1-1" class="tiny-font" style="position: absolute; left: 1500px; top: 250px; width: 700px;">
+                        With reveal animate, you can animate arbitrary HTML content.
+                    </div>
+                    <div id="slide1-2" class="tiny-font" style="position: absolute; left: 1500px; top: 450px; width: 700px;">
+                        Switching to the next slide will animate the next element.
+                    </div>
+                    <div id="slide1-3" style="position: absolute; -webkit-transform: rotate(15deg); left: 1600px; top: 0; width: 800px;">
+                        You can also modify multiple elements in one step.
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Animating SVG</h2>
+
+                <div class="svg animated-svg" src="img/slide2.svg" style="width: 800px; height: 600px;">
+                    <animation duration="500">
+                        <animate data-id="slide2-1" data-property="opacity" data-value="1"></animate>
+                    </animation>
+                    <animation duration="500">
+                        <animate data-id="slide2-2" data-property="opacity" data-value="1"></animate>
+                        <animate data-id="slide2-3" data-property="opacity" data-value="1"></animate>
+                        <animate data-id="slide2-2" data-property="left" data-value="150"></animate>
+                    </animation>
+                    <animation duration="500">
+                        <animate data-id="slide2-3" data-property="transform" data-value="rotate(359)"></animate>
+                    </animation>
+                </div>
+            </section>
+
+        </section>
+
+        <section>
+            <section>
+                <h2>Getting started</h2>
+
+                <ul style="margin-top: 70px; margin-bottom: 70px;">
+                    <li>Copy the code in 'plugin/animate'</li>
+                    <li>Register the plugin</li>
+                </ul>
+
+                <pre><code class="medium-font">{ src: 'plugin/animate/reveal.animate.js', async: true, callback: function() {
+    var animator = Reveal.Animate();
+    animator.initialize();
+    animator.addAnimationProvider('.animated-svg', Reveal.Animate.Svg());
+    animator.addAnimationProvider('.animated-html', Reveal.Animate.Html());
+    animator.setPrintValues();
+} }</code></pre>
+            </section>
+
+            <section>
+                <h2>Animation HTML elements</h2>
+
+                <ul style="margin-top: 70px; margin-bottom: 70px;">
+                    <li>Set an animation duration</li>
+                    <li>Set the ID of the element to be animated</li>
+                    <li>Set the property to be animated</li>
+                    <li>Set the target value</li>
+                </ul>
+
+                <pre><code class="medium-font">&lt;animation duration="500"&gt;
+  &lt;animate data-id="element-to-be-animated" data-property="opacity" data-value="1"&gt;
+  &lt;/animate&gt;
+&lt;/animation&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Animate HTML</h2>
+
+                <ul style="margin-top: 40px; margin-bottom: 40px;">
+                    <li>Create a container for the elements to be animated</li>
+                    <li>Set the container class to 'animated-html'</li>
+                    <li>Put the elements to be animated within the container</li>
+                    <li>Create animation HTML elements within the container</li>
+                </ul>
+
+                <pre><code class="medium-font">&lt;div class="animated-html" style="overflow: hidden;"&gt;
+  &lt;animation duration="500"&gt;
+    &lt;animate data-id="element-to-be-animated" data-property="opacity" data-value="1"&gt;
+    &lt;/animate&gt;
+  &lt;/animation&gt;
+  &lt;div id="element-to-be-animated" style="opacity: 0;"&gt;
+    Element to be animated
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Animate SVG</h2>
+
+                <ul style="margin-top: 70px; margin-bottom: 70px;">
+                    <li>Create a container for the elements to be animated</li>
+                    <li>Set the container class to 'animated-svg' and 'svg'</li>
+                    <li>Set the container 'src' attribute to the image path</li>
+                    <li>Create animation HTML elements within the container</li>
+                </ul>
+
+                <pre><code class="medium-font">&lt;div class="animated-svg svg" src="img/image.svg"&gt;
+  &lt;animation duration="500"&gt;
+    &lt;animate data-id="element-to-be-animated" data-property="opacity" data-value="1"&gt;
+    &lt;/animate&gt;
+  &lt;/animation&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+        </section>
+
+
+
+    </div>
+
+    <!-- The navigational controls UI -->
+    <aside class="controls">
+        <a class="left" href="#">&#x25C4;</a>
+        <a class="right" href="#">&#x25BA;</a>
+        <a class="up" href="#">&#x25B2;</a>
+        <a class="down" href="#">&#x25BC;</a>
+    </aside>
+
+    <!-- Presentation progress bar -->
+    <div class="progress"><span></span></div>
+
+</div>
+
+<script src="js/jquery.1.10.2.js"></script>
+<script src="plugin/animate/jquery.browser.js"></script>
+<script src="plugin/animate/jquery.svg.js"></script>
+<script src="plugin/animate/jquery.svganim.js"></script>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        width: 1024,
+        height: 768,
+        margin: 0,
+
+        //minScale: 1.0,
+        //maxScale: 1.0,
+
+        controls: false,
+        progress: false,
+        history: true,
+        center: true,
+
+        theme: 'sky', // available themes are in /css/theme
+        transition: 'cube', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: 'lib/js/classList.js', condition: function() {
+                return !document.body.classList;
+            } },
+            { src: 'plugin/markdown/marked.js', condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            } },
+            { src: 'plugin/markdown/markdown.js', condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            } },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function() {
+                hljs.initHighlightingOnLoad();
+            } },
+            { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                return !!document.body.classList;
+            } },
+            { src: 'plugin/notes/notes.js', async: true, condition: function() {
+                return !!document.body.classList;
+            } },
+            { src: 'plugin/animate/reveal.animate.js', async: true, callback: function() {
+                var animator = Reveal.Animate();
+                animator.initialize();
+                animator.addAnimationProvider('.animated-svg', Reveal.Animate.Svg());
+                animator.addAnimationProvider('.animated-html', Reveal.Animate.Html());
+                animator.setPrintValues();
+            } }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
