@@ -2,8 +2,9 @@
 
 The plugin provides full-fledged animations for the reveal.js presentation frameworks.
 Currently, two kinds of animations are supported:
-*SVG animations
-*HTML animations
+
+* SVG animations
+* HTML animations
 
 ## Documentation
 
