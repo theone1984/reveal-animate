@@ -1,3 +1,10 @@
+## What does it do?
+
+The plugin provides full-fledged animations for the reveal.js presentation frameworks.
+Currently, two kinds of animations are supported:
+*SVG animations
+*HTML animations
+
 ## Documentation
 
 The plugin is documented using its slideshow as a documentation.
