@@ -46,3 +46,10 @@
 .reveal>.slides section .medium-font {
     font-size: 90%;
 }
+
+.reveal>.slides section.introduction-slide img {
+    border: 0;
+    box-shadow: none;
+
+    background: none;
+}
