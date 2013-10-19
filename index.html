@@ -134,31 +134,36 @@
             <section>
                 <h2>Getting started (2)</h2>
 
-                <ul style="margin-top: 70px; margin-bottom: 70px;">
+                <ul style="margin-top: 50px; margin-bottom: 30px;">
                     <li>Copy the code in 'plugin/animate'</li>
-                    <li>Register the plugin:</li>
+                    <li>Register the plugin (see code below):</li>
+                    <ul>
+                        <li>Using an SVG animation provider</li>
+                        <li>Using an HTML animation provider</li>
+                    </ul>
                 </ul>
 
-                <pre><code class="medium-font">{ src: 'plugin/animate/reveal.animate.js', async: true, callback: function() {
-    var animator = Reveal.Animate();
-    animator.initialize();
-    animator.addAnimationProvider('.animated-svg', Reveal.Animate.Svg());
-    animator.addAnimationProvider('.animated-html', Reveal.Animate.Html());
-    animator.setPrintValues();
+                <pre><code class="medium-font javascript">{ src: 'plugin/animate/reveal.animate.js', async: true, callback: function() {
+    Reveal.Animate({
+        animationProviders: {
+            'animated-svg': Reveal.Animate.Svg(),
+            'animated-html': Reveal.Animate.Html()
+        }
+    });
 } }</code></pre>
             </section>
 
             <section>
                 <h2>Getting started - Quick animations</h2>
 
-                <ul style="margin-top: 70px; margin-bottom: 70px;">
-                    <li>For quick animations, you'll also have to register the quick animation plugin</li>
-                    <li>Register the plugin:</li>
+                <ul style="margin-top: 50px; margin-bottom: 20px;">
+                    <li>For quick animations, you'll also have to register the 'normal' animation plugin</li>
+                    <li>Register the quick animation plugin <strong>before</strong> the animation plugin (see code below)</li>
+                    <li>Choose the animation duration (see option given to the animation transformer)</li>
                 </ul>
 
-                <pre><code class="medium-font">{ src: 'plugin/animate/reveal.quickanim.js', async: false, callback: function() {
+                <pre><code class="medium-font javascript">{ src: 'plugin/animate/reveal.quickanim.js', async: false, callback: function() {
     var quickAnimationsTransformer = Reveal.QuickAnimationTransformer({
-        animationClass: 'animated-html',
         duration: 500
     });
     quickAnimationsTransformer.transform();
@@ -247,13 +252,31 @@
         </section>
 
         <section>
-            <h2>Limitations</h2>
+            <section>
+                <h2>How does it work?</h2>
 
-            <ul style="margin-top: 80px;">
-                <li>Multiple animation sections per slide are not yet supported</li>
-                <li>You cannot mix SVG and HTML animations by now</li>
-                <li>You cannot mix 'normal' HTML animations and quick animations</li>
-            </ul>
+                <ul style="margin-top: 50px;">
+                    <li>The animation keyframes are determined when loading the animation</li>
+                    <li>When pressing Space (or some other key) on the keyboard, the plugin looks for these keyframes</li>
+                    <li>If the slide should be animated, the plugin calculates the animation steps needed</li>
+                    <li>Then, the animation is issued:
+                        <ul>
+                            <li>Using the jQuery animation component for HTML animations</li>
+                            <li>Using the jQuery SVG plugin for SVG animations</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Limitations</h2>
+
+                <ul style="margin-top: 80px;">
+                    <li>Multiple animation sections per slide are not yet supported</li>
+                    <li>You cannot mix SVG and HTML animations by now</li>
+                    <li>You cannot mix 'normal' HTML animations and quick animations</li>
+                </ul>
+            </section>
         </section>
     </div>
 
