@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Datenbanken</title>
+    <title>reveal.animate</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Thomas Endres">
@@ -29,6 +29,7 @@
 </head>
 
 <body>
+
 <div class="background">
 </div>
 
@@ -93,7 +94,7 @@
                         <animate data-id="slide2-2" data-property="left" data-value="150"></animate>
                     </animation>
                     <animation duration="500">
-                        <animate data-id="slide2-3" data-property="transform" data-value="rotate(359)"></animate>
+                        <animate data-id="slide2-3" data-property="transform" data-value="scale(2.0, 2.0)"></animate>
                     </animation>
                 </div>
             </section>
@@ -102,11 +103,26 @@
 
         <section>
             <section>
-                <h2>Getting started</h2>
+                <h2>Getting started (1)</h2>
+
+                <ul style="margin-top: 70px; margin-bottom: 70px;">
+                    <li>Within your HTML code, load the necessary dependencies</li>
+                    <li>The following JavaScript libraries need to be loaded:</li>
+                </ul>
+
+                <pre><code class="medium-font html">&lt;script src="js/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.browser.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.svg.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.svganim.js"&gt;&lt;/script&gt;
+&lt;script src="js/sylvester.js"&gt;&lt;/script&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Getting started (2)</h2>
 
                 <ul style="margin-top: 70px; margin-bottom: 70px;">
                     <li>Copy the code in 'plugin/animate'</li>
-                    <li>Register the plugin</li>
+                    <li>Register the plugin:</li>
                 </ul>
 
                 <pre><code class="medium-font">{ src: 'plugin/animate/reveal.animate.js', async: true, callback: function() {
@@ -117,6 +133,27 @@
     animator.setPrintValues();
 } }</code></pre>
             </section>
+
+            <section>
+                <h2>Getting started - Quick animations</h2>
+
+                <ul style="margin-top: 70px; margin-bottom: 70px;">
+                    <li>For quick animations, you'll also have to register the quick animation plugin</li>
+                    <li>Register the plugin:</li>
+                </ul>
+
+                <pre><code class="medium-font">{ src: 'plugin/animate/reveal.quickanim.js', async: false, callback: function() {
+    var quickAnimationsTransformer = Reveal.QuickAnimationTransformer({
+        animationClass: 'animated-html',
+        duration: 500
+    });
+    quickAnimationsTransformer.transform();
+} },</code></pre>
+            </section>
+
+        </section>
+
+        <section>
 
             <section>
                 <h2>Animation HTML elements</h2>
@@ -156,14 +193,36 @@
             </section>
 
             <section>
-                <h2>Animate SVG</h2>
+                <h2>Quick HTML animations</h2>
 
-                <ul style="margin-top: 70px; margin-bottom: 70px;">
-                    <li>Create a container for the elements to be animated</li>
-                    <li>Set the container class to 'animated-svg' and 'svg'</li>
-                    <li>Set the container 'src' attribute to the image path</li>
-                    <li>Create animation HTML elements within the container</li>
+                <p style="margin-top: 30px;">Quick animations are an alternative to fragmented slides</p>
+
+                <ul style="margin-top: 30px;">
+                    <li>Add a number attribute 'data-animation-index' to the element to be animated</li>
+                    <li>The element will not be shown when the slide becomes visible</li>
+                    <li>All elements containing the data-animation-index attribute will be shown in the order of the animation index</li>
                 </ul>
+
+                <pre><code class="medium-font" style="margin-top: 50px;">&lt;div data-animation-index="1"&gt;
+  Element to be shown first
+&lt;/div&gt;
+&lt;div data-animation-index="2"&gt;
+  Element to be shown second
+&lt;/div&gt;</code></pre>
+            </section>
+
+        </section>
+
+
+        <section>
+            <h2>Animate SVG</h2>
+
+            <ul style="margin-top: 70px; margin-bottom: 70px;">
+                <li>Create a container for the elements to be animated</li>
+                <li>Set the container class to 'animated-svg' and 'svg'</li>
+                <li>Set the container 'src' attribute to the image path</li>
+                <li>Create animation HTML elements within the container</li>
+            </ul>
 
                 <pre><code class="medium-font">&lt;div class="animated-svg svg" src="img/image.svg"&gt;
   &lt;animation duration="500"&gt;
@@ -171,28 +230,26 @@
     &lt;/animate&gt;
   &lt;/animation&gt;
 &lt;/div&gt;</code></pre>
-            </section>
+        </section>
 
+        <section>
+            <h2>Limitations</h2>
+
+            <ul style="margin-top: 80px;">
+                <li>Multiple animation sections per slide are not yet supported</li>
+                <li>You cannot mix SVG and HTML animations by now</li>
+                <li>You cannot mix 'normal' HTML animations and quick animations</li>
+            </ul>
         </section>
     </div>
-
-    <!-- The navigational controls UI -->
-    <aside class="controls">
-        <a class="left" href="#">&#x25C4;</a>
-        <a class="right" href="#">&#x25BA;</a>
-        <a class="up" href="#">&#x25B2;</a>
-        <a class="down" href="#">&#x25BC;</a>
-    </aside>
-
-    <!-- Presentation progress bar -->
-    <div class="progress"><span></span></div>
 
 </div>
 
 <script src="js/jquery.1.10.2.js"></script>
-<script src="plugin/animate/jquery.browser.js"></script>
-<script src="plugin/animate/jquery.svg.js"></script>
-<script src="plugin/animate/jquery.svganim.js"></script>
+<script src="js/jquery.browser.js"></script>
+<script src="js/jquery.svg.js"></script>
+<script src="js/jquery.svganim.js"></script>
+<script src="js/sylvester.js"></script>
 
 <script src="lib/js/head.min.js"></script>
 <script src="js/reveal.min.js"></script>
@@ -202,8 +259,6 @@
     // Full list of configuration options available here:
     // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
-        width: 1024,
-        height: 768,
         margin: 0,
 
         //minScale: 1.0,
@@ -237,12 +292,20 @@
             { src: 'plugin/notes/notes.js', async: true, condition: function() {
                 return !!document.body.classList;
             } },
+            { src: 'plugin/animate/reveal.quickanim.js', async: false, callback: function() {
+                var quickAnimationsTransformer = Reveal.QuickAnimationTransformer({
+                    animationClass: 'animated-html',
+                    duration: 500
+                });
+                quickAnimationsTransformer.transform();
+            } },
             { src: 'plugin/animate/reveal.animate.js', async: true, callback: function() {
-                var animator = Reveal.Animate();
-                animator.initialize();
-                animator.addAnimationProvider('.animated-svg', Reveal.Animate.Svg());
-                animator.addAnimationProvider('.animated-html', Reveal.Animate.Html());
-                animator.setPrintValues();
+                Reveal.Animate({
+                    animationProviders: {
+                        'animated-svg': Reveal.Animate.Svg(),
+                        'animated-html': Reveal.Animate.Html()
+                    }
+                });
             } }
         ]
     });
