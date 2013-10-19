@@ -23,4 +23,6 @@ python -m SimpleHTTPServer 8081
 
 Then, navigate to "localhost:8081".
 
+## License
+
 This software is licensed using the Apache License, Version 2.
