@@ -6,6 +6,9 @@ Currently, two kinds of animations are supported:
 * HTML animations
 * SVG animations
 
+[View the demo!](http://theone1984.github.io/reveal-animate)
+
+
 ## Documentation
 
 The plugin is documented using its slideshow as a documentation.
