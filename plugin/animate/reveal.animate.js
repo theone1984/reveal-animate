@@ -22,6 +22,8 @@
 
         var FRAGMENT_CLASSNAME = 'fragment';
 
+        var FRAGMENT_SHOWN_CLASSNAME = 'visible';
+
         var animationProviders = {};
 
         var animationProvidersToLoad = 0;
@@ -380,6 +382,16 @@
             }
         }
 
+        function setFragmentsToDesiredState(animationElement, desiredState) {
+            var animationStepElements = $('.' + FRAGMENT_CLASSNAME, animationElement);
+
+            if (desiredState == SHOWN) {
+                animationStepElements.addClass(FRAGMENT_SHOWN_CLASSNAME);
+            } else {
+                animationStepElements.removeClass(FRAGMENT_SHOWN_CLASSNAME);
+            }
+        }
+
         function setSectionAnimationElementsToDesiredState(sections, desiredState) {
             var className, animationProvider, elements;
 
@@ -388,7 +400,9 @@
                 elements = sections.filter("." + className).add(sections.children("." + className));
 
                 elements.each(function() {
-                    animateImmediately(animationProvider, $(this), desiredState);
+                    var element = $(this);
+                    animateImmediately(animationProvider, element, desiredState);
+                    setFragmentsToDesiredState(element, desiredState);
                 });
             }
         }
