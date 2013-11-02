@@ -20,6 +20,8 @@
         var SHOWN = "SHOWN";
         var NOT_SHOWN = "NOT_SHOWN";
 
+        var FRAGMENT_CLASSNAME = 'fragment';
+
         var animationProviders = {};
 
         var animationProvidersToLoad = 0;
@@ -88,10 +90,16 @@
             animationElement.attr(CURRENT_ANIMATION_NUMBER_ATTRIBUTE, getCurrentAnimationNumber(animationElement) + direction);
         }
 
-        function keyDownListener(event) {
-            var direction = getDirection(event);
+        function fragmentShownListener(event) {
+            tryAnimateForEvent(event, 1);
+        }
 
-            if (direction == 0 || !isAnimatedSlide()) {
+        function fragmentHiddenListener(event) {
+            tryAnimateForEvent(event, -1);
+        }
+
+        function tryAnimateForEvent(event, direction) {
+            if (!isFragmentEventForAnimationElement(event) || !isAnimatedSlide()) {
                 return;
             }
 
@@ -101,15 +109,8 @@
             }
         }
 
-        function getDirection(event) {
-            if ([80, 33, 75, 38].indexOf(event.which) > -1) {
-                // p, page up, arrow up
-                return -1;
-            } else if ([32, 78, 34, 74, 40].indexOf(event.which) > -1) {
-                // space, n, page down, arrow down
-                return +1;
-            }
-            return 0;
+        function isFragmentEventForAnimationElement(event) {
+            return event.fragment.tagName.toLowerCase() === ANIMATION_ELEMENT_NAME;
         }
 
         function getInitialValues(animationProvider, animationElement, animations) {
@@ -279,6 +280,22 @@
             return (/print-pdf/gi).test(window.location.search);
         }
 
+        function addFragmentClassToAnimationElements(sections) {
+            var className, animationProvider, animatedElements, animatedElement, animationElements;
+
+            for (className in animationProviders) {
+                animationProvider = animationProviders[className];
+                animatedElements = sections.filter("." + className).add(sections.children("." + className));
+
+                animatedElements.each(function() {
+                    animatedElement = $(this);
+                    animationElements = $(ANIMATION_ELEMENT_NAME, animatedElement);
+
+                    animationElements.addClass(FRAGMENT_CLASSNAME);
+                });
+            }
+        }
+
         function getInitialStateSetInAnimationElement(animationElement) {
             var initialStateValues, stateEntry, id, property, value;
 
@@ -323,10 +340,14 @@
         }
 
         function initialize() {
-            initializeSlides($(SLIDES_SELECTOR));
+            var slides = $(SLIDES_SELECTOR);
+
+            addFragmentClassToAnimationElements(slides);
+            initializeSlides(slides);
 
             Reveal.addEventListener('slidechanged', slideChangedListener);
-            $('body').keydown(keyDownListener);
+            Reveal.addEventListener('fragmentshown', fragmentShownListener);
+            Reveal.addEventListener('fragmenthidden', fragmentHiddenListener);
         }
 
         function performAnimationStepImmediately(animationToPerform, animationProvider, animationElement, desiredState) {
