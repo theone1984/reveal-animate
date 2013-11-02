@@ -136,11 +136,12 @@
 
                 <ul style="margin-top: 50px; margin-bottom: 30px;">
                     <li>Copy the code in 'plugin/animate'</li>
-                    <li>Register the plugin (see code below):</li>
-                    <ul>
-                        <li>Using an SVG animation provider</li>
-                        <li>Using an HTML animation provider</li>
-                    </ul>
+                    <li>Register the plugin (see code below):
+                        <ul>
+                            <li>Using an SVG animation provider</li>
+                            <li>Using an HTML animation provider</li>
+                        </ul>
+                    </li>
                 </ul>
 
                 <pre><code class="medium-font javascript">{ src: 'plugin/animate/reveal.animate.js', async: true, callback: function() {
@@ -345,6 +346,15 @@
                 });
             } }
         ]
+    });
+
+    // Workaround for Reveal.js issue #684
+    Reveal.addEventListener('slidechanged', function() {
+        var PAST_SLIDES_SELECTOR = ".reveal .slides section.past, .reveal .slides section.past section";
+        var FUTURE_SLIDES_SELECTOR = ".reveal .slides section.future, .reveal .slides section.future section";
+
+        $(".fragment", $(PAST_SLIDES_SELECTOR)).addClass('visible');
+        $(".fragment", $(FUTURE_SLIDES_SELECTOR)).removeClass('visible');
     });
 
 </script>
