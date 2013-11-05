@@ -549,6 +549,10 @@
             var value, element;
             element = getElementById(animationElement, elementId);
 
+            if (element == null) {
+               throw('Element not found ' + elementId);
+            }
+
             if (['x', 'y', 'width', 'height'].indexOf(property) > -1) {
                 value = element[property].baseVal.value;
             } else if (property === 'transform') {
@@ -579,6 +583,10 @@
 
         function setValue(animationElement, elementId, property, value) {
             var element = getElementById(animationElement, elementId);
+
+            if (element == null) {
+               throw('Element not found ' + elementId);
+            }
 
             if (['x', 'y', 'width', 'height'].indexOf(property) > -1) {
                 element[property].baseVal.value = value;
