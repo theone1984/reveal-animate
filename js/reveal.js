@@ -246,9 +246,19 @@ var Reveal = (function(){
 	 * will load after reveal.js has been started up.
 	 */
 	function load() {
-
 		var scripts = [],
-			scriptsAsync = [];
+			scriptsAsync = [],
+            scriptsToApply = 0;
+
+        // Called once synchronous scripts finish loading
+        function proceed() {
+            if( scriptsAsync.length ) {
+                // Load asynchronous scripts
+                head.js.apply( null, scriptsAsync );
+            }
+
+            start();
+        }
 
 		for( var i = 0, len = config.dependencies.length; i < len; i++ ) {
 			var s = config.dependencies[i];
@@ -264,23 +274,22 @@ var Reveal = (function(){
 
 				// Extension may contain callback functions
 				if( typeof s.callback === 'function' ) {
-					head.ready( s.src.match( /([\w\d_\-]*)\.?js$|[^\\\/]*$/i )[0], s.callback );
+                    (function(s) {
+                        head.ready( s.src.match( /([\w\d_\-]*)\.?js$|[^\\\/]*$/i )[0], function() {
+                            s.callback.apply(this);
+
+                            scriptsToApply--;
+                            if (scriptsToApply === 0) {
+                                proceed();
+                            }
+                        });
+                    })(s);
 				}
 			}
 		}
 
-		// Called once synchronous scripts finish loading
-		function proceed() {
-			if( scriptsAsync.length ) {
-				// Load asynchronous scripts
-				head.js.apply( null, scriptsAsync );
-			}
-
-			start();
-		}
-
 		if( scripts.length ) {
-            scripts.push(proceed);
+            scriptsToApply = scripts.length;
 
 			// Load synchronous scripts
 			head.js.apply( null, scripts );
