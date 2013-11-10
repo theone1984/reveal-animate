@@ -273,18 +273,18 @@ var Reveal = (function(){
 				}
 
 				// Extension may contain callback functions
-				if( typeof s.callback === 'function' ) {
-                    (function(s) {
-                        head.ready( s.src.match( /([\w\d_\-]*)\.?js$|[^\\\/]*$/i )[0], function() {
+                (function(s) {
+                    head.ready( s.src.match( /([\w\d_\-]*)\.?js$|[^\\\/]*$/i )[0], function() {
+                        if( typeof s.callback === 'function' ) {
                             s.callback.apply(this);
+                        }
 
-                            scriptsToApply--;
-                            if (scriptsToApply === 0) {
-                                proceed();
-                            }
-                        });
-                    })(s);
-				}
+                        scriptsToApply--;
+                        if (scriptsToApply === 0) {
+                            proceed();
+                        }
+                    });
+                })(s);
 			}
 		}
 
